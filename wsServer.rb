@@ -64,7 +64,8 @@ class MyServer
         end
 
 
-        # Return async Rack response ?????
+        # Return async Rack response
+        # this line is essential!
         ws.rack_response
       else
         # Normal HTTP request
