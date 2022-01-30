@@ -18,8 +18,12 @@ EM.run do
     # if thread is not used, messages to other clients will
     # be delayed
     Thread.new {
-      msg = $stdin.gets.chomp
-      ws.send(msg)
+      loop {
+        msg = $stdin.gets.chomp
+        ws.send(msg)
+      }
+      # msg = $stdin.gets.chomp
+      # ws.send(msg)
     }
   end
 

@@ -56,13 +56,15 @@ EM.run do
 end
 ```
 Within the EM run block, add all the websocket handlers ```on :open```,```on :message``` and ```on :close```.
-Note that to be able to test in CLI with user input message, use new thread for command line input - so that waiting for user input won't block other on :message handler making messages being delayed.
+Note that to be able to test in CLI with user input message, use new thread for command line input loop (looping so user can input multiple times) - so that waiting for user input won't block other on :message handler making messages being delayed.
 ```ruby
 ws.on :message do |event|
   puts event.data
   Thread.new {
-    msg = $stdin.gets.chomp
-    ws.send(msg)
+    loop {
+        msg = $stdin.gets.chomp
+        ws.send(msg)
+      }
   }
 end
 ```
